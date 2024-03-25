@@ -78,8 +78,7 @@ static int cmd_x(char *args) {
 
     arg1 = strtok(args, " ");
     arg2 = strtok(NULL, " ");
-    printf("%s\n",arg1);
-    printf("%s\n",arg2);
+
     sscanf(arg1, "%d", &len);
     sscanf(arg2, "%x", &baseaddr);
 

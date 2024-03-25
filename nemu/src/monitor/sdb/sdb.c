@@ -54,17 +54,22 @@ static int cmd_q(char *args) {
 
 static int si(char *args) {
   int n = 0;
-  n = atoi(args);
-  printf("%d", n);
-  // for(i = n,i>0,i--){
-  // }
+  if(args == NULL)n = 1;else sscanf(args, "%d", &n);
+  printf("execute %d steps.\n", n);
+  cpu_exec(n);
   return 0;
 }
 
-static int test(char *args) {
-  printf("test");
-  return 0;
-}
+// static int info(char *args) {
+//   if(*args == "r")begin
+//     isa_reg_display();
+//   end
+
+//   if(*args == "w")begin
+
+//   end
+//   return 0;
+// }
 
 static int cmd_help(char *args);
 
@@ -76,8 +81,9 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "t", "test", test },
   { "si", "Single-step execution n setps", si },
+//  { "info", "Use "info r" to print the status of registers or use "info w" to print monitoring point information", info },
+
   /* TODO: Add more commands */
 
 };

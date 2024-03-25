@@ -63,11 +63,9 @@ static int si(char *args) {
 static int info(char *args) {
   if(strcmp(args, "r") == 0){
     isa_reg_display();
-  }
-
-  if(strcmp(args, "w") == 0){
+  }else if(strcmp(args, "w") == 0){
     isa_reg_display();
-  }
+  }else printf("invalid args.\n");
   return 0;
 }
 

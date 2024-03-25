@@ -53,7 +53,9 @@ static int cmd_q(char *args) {
 }
 
 static int si(char *args) {
-  printf("%c",*args);
+  int n = 0;
+  n = atoi(args);
+  printf("%d", n);
   // for(i = n,i>0,i--){
   // }
   return 0;

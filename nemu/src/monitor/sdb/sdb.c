@@ -15,6 +15,7 @@
 
 #include <isa.h>
 #include <cpu/cpu.h>
+#include <memory/paddr.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
@@ -70,9 +71,23 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-  printf("%s\n",args);
-  // printf("%s\n",*args[1]);
-  // printf("%s\n",*args[2]);
+    char* arg1;
+    char* arg2;
+    int len = 0;
+    paddr_t baseaddr = 0;
+
+    arg1 = strtok(args, " ");
+    arg2 = strtok(NULL, " ");
+    printf("%s\n",arg1);
+    printf("%s\n",arg2);
+    sscanf(arg1, "%d", &len);
+    sscanf(arg2, "%x", &baseaddr);
+
+    for(int i = 0 ; i < len ; i ++)
+    {
+        printf("%x\n",paddr_read(baseaddr,4));
+        baseaddr = baseaddr + 4;
+    }
   return 0;
 }
 

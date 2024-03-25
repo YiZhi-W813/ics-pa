@@ -52,7 +52,7 @@ static int cmd_q(char *args) {
   return -1;
 }
 
-static int si(char *args) {
+static int cmd_si(char *args) {
   int n = 0;
   if(args == NULL)n = 1;else sscanf(args, "%d", &n);
   printf("execute %d steps.\n", n);
@@ -60,12 +60,19 @@ static int si(char *args) {
   return 0;
 }
 
-static int info(char *args) {
+static int cmd_info(char *args) {
   if(strcmp(args, "r") == 0){
     isa_reg_display();
   }else if(strcmp(args, "w") == 0){
     isa_reg_display();
   }else printf("invalid args.\n");
+  return 0;
+}
+
+static int cmd_x(char *args) {
+  printf("%s\n",args);
+  // printf("%s\n",*args[1]);
+  // printf("%s\n",*args[2]);
   return 0;
 }
 
@@ -79,9 +86,9 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Single-step execution n setps", si },
-  { "info", "Use info r to print the status of registers or use info w to print monitoring point information", info },
-
+  { "si", "Single-step execution n setps", cmd_si },
+  { "info", "Use info r to print the status of registers or use info w to print monitoring point information", cmd_info },
+  { "x", "Scan memory", cmd_x },
   /* TODO: Add more commands */
 
 };

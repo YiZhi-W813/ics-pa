@@ -60,16 +60,16 @@ static int si(char *args) {
   return 0;
 }
 
-// static int info(char *args) {
-//   if(*args == "r")begin
-//     isa_reg_display();
-//   end
+static int info(char *args) {
+  if(strcmp(args, "r") == 0){
+    isa_reg_display();
+  }
 
-//   if(*args == "w")begin
-
-//   end
-//   return 0;
-// }
+  if(strcmp(args, "w") == 0){
+    isa_reg_display();
+  }
+  return 0;
+}
 
 static int cmd_help(char *args);
 
@@ -82,7 +82,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single-step execution n setps", si },
-//  { "info", "Use "info r" to print the status of registers or use "info w" to print monitoring point information", info },
+  { "info", "Use info r to print the status of registers or use info w to print monitoring point information", info },
 
   /* TODO: Add more commands */
 

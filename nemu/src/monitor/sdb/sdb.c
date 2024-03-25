@@ -52,6 +52,13 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int si(char *args) {
+  printf("%s",args);
+  // for(i = n,i>0,i--){
+  // }
+  return 0;
+}
+
 static int test(char *args) {
   printf("test");
   return 0;
@@ -68,6 +75,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "t", "test", test },
+  { "si", "Single-step execution n setps", si },
   /* TODO: Add more commands */
 
 };

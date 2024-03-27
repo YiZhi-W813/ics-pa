@@ -252,9 +252,9 @@ uint32_t eval(int p, int q) {
         int prio_min = 0;
         for(int i = p ; i <= q ; i ++)
         {
-            if(tokens[i].type == '(')
+            if(tokens[i].type == TK_LEFT)
             {
-                while(tokens[i].type != ')')
+                while(tokens[i].type != TK_RIGHT)
                     i ++;
             }
             if(tokens[i].type == TK_OR){ //优先级12
@@ -377,7 +377,7 @@ word_t expr(char *e, bool *success) {
 //  printf("initial hex tk success!\n");
 
     for(int i = 0; i < tokens_len; i ++){ //初始化负数，负号在字符串的最前面或是负号的前面不是数字而后面是数字，则为负数
-	    if(tokens[i].type == '-' && ((i > 0 && tokens[i-1].type != TK_NUM && tokens[i+1].type == TK_NUM) || (i == 0))){
+	    if(tokens[i].type == TK_SUB && ((i > 0 && tokens[i-1].type != TK_NUM && tokens[i+1].type == TK_NUM) || (i == 0))){
         tokens[i].type = TK_NOTYPE; //判断出负号后把负号后一个token的全部内容向后移一位，最前面加个负号
         for(int j = 31; j > 0; j --){
           tokens[i+1].str[j] = tokens[i+1].str[j-1];
@@ -394,7 +394,7 @@ word_t expr(char *e, bool *success) {
 //  printf("initial neg num tk success!\n");
   
     for(int i = 0 ; i < tokens_len ; i ++){ //初始化非运算
-	    if(tokens[i].type == '!'){
+	    if(tokens[i].type == TK_NOT){
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
         if(tmp == 0){
@@ -415,10 +415,9 @@ word_t expr(char *e, bool *success) {
 
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
-      printf("tokens[%d].type = %d\n",i,tokens[i+1].type);
-      if((tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
-        ||(tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
-        ||(tokens[i].type == '*' && i == 0)){
+      if((tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
+        ||(tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
+        ||(tokens[i].type == TK_MUL && i == 0)){
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
         uintptr_t point = (uintptr_t)tmp;

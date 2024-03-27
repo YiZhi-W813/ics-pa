@@ -199,7 +199,7 @@ static bool make_token(char *e) {
       return false;
     }
   }
-  printf("Make tokens success!\n");
+//  printf("Make tokens success!\n");
   return true;
 }
 
@@ -345,10 +345,9 @@ word_t expr(char *e, bool *success) {
       
     else{
 	    tokens_len ++;
-      printf("tk len:%d\n",tokens_len);
     }
   }
-  printf("compute tk len success!\n");
+//  printf("compute tk len success!\n");
   /* TODO: Insert codes to evaluate the expression. */
    for(int i = 0; i < tokens_len; i ++){    //初始化regs
       if(tokens[i].type == TK_REG){
@@ -362,7 +361,7 @@ word_t expr(char *e, bool *success) {
       }
     }
 
-  printf("initial reg tk success!\n");
+//  printf("initial reg tk success!\n");
 
     for(int i = 0; i < tokens_len; i ++){   //初始化hex
       if(tokens[i].type == TK_HEX){
@@ -371,7 +370,7 @@ word_t expr(char *e, bool *success) {
         }
     }
 
-  printf("initial hex tk success!\n");
+//  printf("initial hex tk success!\n");
 
     for(int i = 0; i < tokens_len; i ++){ //初始化负数，负号在字符串的最前面或是负号的前面不是数字而后面是数字，则为负数
 	    if(tokens[i].type == '-' && ((i > 0 && tokens[i-1].type != TK_NUM && tokens[i+1].type == TK_NUM) || (i == 0))){
@@ -388,7 +387,7 @@ word_t expr(char *e, bool *success) {
 	    }
     }
 
-  printf("initial neg num tk success!\n");
+//  printf("initial neg num tk success!\n");
   
     for(int i = 0 ; i < tokens_len ; i ++){ //初始化非运算
 	    if(tokens[i].type == '!'){
@@ -408,7 +407,7 @@ word_t expr(char *e, bool *success) {
 	    } 
     }
 
-  printf("initial ! tk success!\n");
+//  printf("initial ! tk success!\n");
 
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
@@ -427,8 +426,8 @@ word_t expr(char *e, bool *success) {
         printf("for(point)tk len:%d\n",tokens_len);
       }
     }
-    printf("initial * tk success!\n");
-    printf("After inital tk len = %d\n",tokens_len);
+//    printf("initial * tk success!\n");
+//    printf("After inital tk len = %d\n",tokens_len);
   *success = true;
   return eval(0, tokens_len - 1);
 }

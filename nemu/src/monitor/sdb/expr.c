@@ -14,7 +14,7 @@
 ***************************************************************************************/
 
 #include <isa.h>
-#include <stdio.h>
+#include <memory/paddr.h>
 #include <stdlib.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -420,12 +420,11 @@ word_t expr(char *e, bool *success) {
         ||(tokens[i].type == TK_MUL && i == 0)){
         printf("tokens[%d].type = %d .str=%s\n",i+1,tokens[i+1].type,tokens[i+1].str);
         tokens[i].type = TK_NOTYPE;
-        int tmp = atoi(tokens[i+1].str);
+        int addr = atoi(tokens[i+1].str);
         printf("test");
  //       printf("tmp = %d",tmp);
-        uintptr_t point = (uintptr_t)tmp;
-        printf("poinr = %lu",point);
-        int value = *((int*)point);
+
+        int value = paddr_read(addr, 4);
         sprintf(tokens[i+1].str, "%d", value);	    
         for(int j = i + 1; j < tokens_len ; j ++){
           tokens[j - 1] = tokens[j];

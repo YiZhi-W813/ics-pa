@@ -421,7 +421,9 @@ word_t expr(char *e, bool *success) {
         printf("tokens[%d].type = %d .str=%s\n",i+1,tokens[i+1].type,tokens[i+1].str);
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
+        printf("tmp = %d",tmp);
         uintptr_t point = (uintptr_t)tmp;
+        printf("poinr = %lu",point);
         int value = *((int*)point);
         sprintf(tokens[i+1].str, "%d", value);	    
         for(int j = i + 1; j < tokens_len ; j ++){

@@ -427,8 +427,8 @@ word_t expr(char *e, bool *success) {
         printf("for(point)tk len:%d\n",tokens_len);
       }
     }
+    printf("initial * tk success!\n");
 
-  printf("test");
   *success = true;
   return eval(0, tokens_len - 1);
 }

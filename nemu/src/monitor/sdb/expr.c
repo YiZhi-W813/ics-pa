@@ -415,10 +415,11 @@ word_t expr(char *e, bool *success) {
 
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
-      printf("test");
+      printf("test\n");
       if((tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
         ||(tokens[i].type == '*' && i == 0)){
+        printf("match point at %d\n",i);
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
         uintptr_t point = (uintptr_t)tmp;

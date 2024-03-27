@@ -410,7 +410,17 @@ word_t expr(char *e, bool *success) {
         tokens_len --;
 	    } 
     }
-
+int char2int(char s[]){
+    int s_size = strlen(s);
+    int res = 0 ;
+    for(int i = 0 ; i < s_size ; i ++)
+    {
+	res += s[i] - '0';
+	res *= 10;
+    }
+    res /= 10;
+    return res;
+}
 //  printf("initial ! tk success!\n");
 
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
@@ -420,9 +430,9 @@ word_t expr(char *e, bool *success) {
         ||(tokens[i].type == TK_MUL && i == 0)){
         printf("tokens[%d].type = %d .str=%s\n",i+1,tokens[i+1].type,tokens[i+1].str);
         tokens[i].type = TK_NOTYPE;
-        long tmp = atol(tokens[i+1].str);\
+        int tmp = char2int(tokens[i+1].str);
         printf("test");
-        printf("tmp = %ld",tmp);
+        printf("tmp = %d",tmp);
         uintptr_t point = (uintptr_t)tmp;
         printf("poinr = %lu",point);
         int value = *((int*)point);

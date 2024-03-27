@@ -120,7 +120,7 @@ static bool make_token(char *e) {
           case TK_HEX:
             tokens[nr_token].type=rules[i].token_type;
 				    strncpy(tokens[nr_token].str + 1,substr_start,substr_len);
-
+            tokens[nr_token].str[0] = '0';
             printf("token str = %s\n",tokens[nr_token].str);
             nr_token++;
 				    break;

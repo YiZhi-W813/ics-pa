@@ -419,7 +419,7 @@ word_t expr(char *e, bool *success) {
       }
     }
 
-    
+  printf("test");
   *success = true;
   return eval(0, tokens_len - 1);
 }

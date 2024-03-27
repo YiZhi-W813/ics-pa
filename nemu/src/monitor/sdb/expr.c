@@ -421,9 +421,6 @@ word_t expr(char *e, bool *success) {
         printf("tokens[%d].type = %d .str=%s\n",i+1,tokens[i+1].type,tokens[i+1].str);
         tokens[i].type = TK_NOTYPE;
         int addr = atoi(tokens[i+1].str);
-        printf("test");
- //       printf("tmp = %d",tmp);
-
         int value = paddr_read(addr, 4);
         sprintf(tokens[i+1].str, "%d", value);	    
         for(int j = i + 1; j < tokens_len ; j ++){

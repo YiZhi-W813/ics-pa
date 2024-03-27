@@ -339,8 +339,10 @@ word_t expr(char *e, bool *success) {
   for(int i = 0 ; i < 32 ; i ++){
 	  if(tokens[i].type == 0) 
       break;
-    else
+    else{
 	    tokens_len ++;
+      printf("tk len:%d",tokens_len);
+    }
   }
 
   /* TODO: Insert codes to evaluate the expression. */

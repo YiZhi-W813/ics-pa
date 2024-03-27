@@ -420,9 +420,9 @@ word_t expr(char *e, bool *success) {
         ||(tokens[i].type == TK_MUL && i == 0)){
         printf("tokens[%d].type = %d .str=%s\n",i+1,tokens[i+1].type,tokens[i+1].str);
         tokens[i].type = TK_NOTYPE;
-        printf("test\n");
         long tmp = atol(tokens[i+1].str);
-        printf("tmp = %ld",tmp);
+        printf("test\n");
+//        printf("tmp = %ld",tmp);
         uintptr_t point = (uintptr_t)tmp;
         printf("poinr = %lu",point);
         int value = *((int*)point);

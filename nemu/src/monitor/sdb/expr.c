@@ -337,7 +337,7 @@ word_t expr(char *e, bool *success) {
   }
 
   int tokens_len = 0;
-  for(int i = 0 ; i < 32 ; i ++){
+  for(int i = 0 ; i < 30 ; i ++){
 	  if(tokens[i].type == 0){
 //      printf("tk%d's tpye is %d.\n",i,tokens[i].type);
       break;

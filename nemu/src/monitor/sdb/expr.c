@@ -50,7 +50,7 @@ static struct rule {
   {"\\$[0-9a-z]+", TK_REG},   // regs
   {"\\=\\=", TK_EQ},          // equal
   {"\\!\\=", TK_NEQ},
-  {"\\<\\=", TK_LTOEQ},
+  {"<\\=", TK_LTOEQ},
   {"\\|\\|", TK_OR},          
   {"\\&\\&", TK_AND},
   {"\\!", TK_NOT},

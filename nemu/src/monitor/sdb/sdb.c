@@ -90,6 +90,14 @@ static int cmd_x(char *args) {
   return 0;
 }
 
+static int cmd_p(char *args) {
+  int result = 0;
+  bool success = false;
+  result = expr(args, &success);
+  printf("The result of the expression is %d.\n", result);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -103,6 +111,7 @@ static struct {
   { "si", "Single-step execution n setps", cmd_si },
   { "info", "Use info r to print the status of registers or use info w to print monitoring point information", cmd_info },
   { "x", "Scan memory", cmd_x },
+  { "p", "Evolution expression", cmd_p },
   /* TODO: Add more commands */
 
 };

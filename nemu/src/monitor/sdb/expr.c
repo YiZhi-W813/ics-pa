@@ -354,6 +354,7 @@ word_t expr(char *e, bool *success) {
    for(int i = 0; i < tokens_len; i ++){    //初始化regs
       if(tokens[i].type == TK_REG){
           bool success = false;
+          printf("%s\n",tokens[i].str);
           int tmp = isa_reg_str2val(tokens[i].str, &success);    
 
           if(success) 

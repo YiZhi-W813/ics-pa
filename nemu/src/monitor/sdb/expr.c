@@ -428,7 +428,7 @@ word_t expr(char *e, bool *success) {
       }
     }
     printf("initial * tk success!\n");
-
+    printf("After inital tk len = %d\n",tokens_len);
   *success = true;
   return eval(0, tokens_len - 1);
 }

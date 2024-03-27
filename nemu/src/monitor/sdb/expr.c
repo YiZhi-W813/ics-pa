@@ -199,7 +199,7 @@ static bool make_token(char *e) {
       return false;
     }
   }
-
+  printf("Make tokens success!\n");
   return true;
 }
 
@@ -348,7 +348,7 @@ word_t expr(char *e, bool *success) {
       printf("tk len:%d\n",tokens_len);
     }
   }
-
+  printf("compute tk len success!\n");
   /* TODO: Insert codes to evaluate the expression. */
    for(int i = 0; i < tokens_len; i ++){    //初始化regs
       if(tokens[i].type == TK_REG){

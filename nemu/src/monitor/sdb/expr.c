@@ -339,18 +339,15 @@ word_t expr(char *e, bool *success) {
   int tokens_len = 0;
   for(int i = 0 ; i < 32 ; i ++){
 	  if(tokens[i].type == 0){
-      printf("tk%d's tpye is %d.\n",i,tokens[i].type);
       break;
     }
-      
     else{
 	    tokens_len ++;
     }
   }
 
   for(int i = 0 ; i < tokens_len ; i ++){
-	  printf("before tokens[%d].type = %d\n",i,tokens[i+1].type);
-
+	  printf("before tokens[%d].type = %d\n",i,tokens[i].type);
   }
 //  printf("compute tk len success!\n");
   /* TODO: Insert codes to evaluate the expression. */
@@ -422,7 +419,6 @@ word_t expr(char *e, bool *success) {
       if((tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
         ||(tokens[i].type == '*' && i == 0)){
-        printf("match point at %d\n",i);
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
         uintptr_t point = (uintptr_t)tmp;
@@ -432,7 +428,6 @@ word_t expr(char *e, bool *success) {
           tokens[j - 1] = tokens[j];
         }
         tokens_len --;
-        printf("for(point)tk len:%d\n",tokens_len);
       }
     }
 //    printf("initial * tk success!\n");

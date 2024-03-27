@@ -415,6 +415,7 @@ word_t expr(char *e, bool *success) {
           tokens[j - 1] = tokens[j];
         }
         tokens_len --;
+        printf("for(point)tk len:%d\n",tokens_len);
       }
     }
 

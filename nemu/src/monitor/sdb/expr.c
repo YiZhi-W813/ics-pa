@@ -349,6 +349,11 @@ word_t expr(char *e, bool *success) {
 	    tokens_len ++;
     }
   }
+
+  for(int i = 0 ; i < tokens_len ; i ++){
+	  printf("before tokens[%d].type = %d\n",i,tokens[i+1].type);
+
+  }
 //  printf("compute tk len success!\n");
   /* TODO: Insert codes to evaluate the expression. */
    for(int i = 0; i < tokens_len; i ++){    //初始化regs

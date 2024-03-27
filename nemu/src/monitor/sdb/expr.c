@@ -418,7 +418,7 @@ word_t expr(char *e, bool *success) {
       if((tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
         ||(tokens[i].type == TK_MUL && i == 0)){
-        printf("test\n");
+        printf("tokens[%d].type = %d .str=%s\n",i,tokens[i].type,tokens[i].str);
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
         uintptr_t point = (uintptr_t)tmp;

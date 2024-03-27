@@ -415,6 +415,7 @@ word_t expr(char *e, bool *success) {
 
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
+      printf("test");
       if((tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
         ||(tokens[i].type == '*' && i == 0)){

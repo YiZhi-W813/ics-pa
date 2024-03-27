@@ -116,6 +116,11 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NOTYPE:
             break;  //空格不做处理，即消除空格
+          case TK_HEX:
+            tokens[nr_token].type=rules[i].token_type;
+				    strncpy(tokens[nr_token].str,substr_start,substr_len);
+            nr_token++;
+				    break;
           case TK_NUM:
             tokens[nr_token].type=rules[i].token_type;
 				    strncpy(tokens[nr_token].str,substr_start,substr_len);
@@ -143,11 +148,6 @@ static bool make_token(char *e) {
 				    break;
           case TK_RIGHT:
             tokens[nr_token].type=rules[i].token_type;
-            nr_token++;
-				    break;
-          case TK_HEX:
-            tokens[nr_token].type=rules[i].token_type;
-				    strncpy(tokens[nr_token].str,substr_start,substr_len);
             nr_token++;
 				    break;
           case TK_REG:

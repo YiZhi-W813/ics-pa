@@ -46,9 +46,9 @@ static struct rule {
   {"\\)", TK_RIGHT},         // bracket right
 
 //extend
-  {"0x[0-9A-Fa-f]+", TK_HEX}, // hex
+  {"0[xX][0-9A-Fa-f]+", TK_HEX}, // hex
   {"\\$[0-9a-z]+", TK_REG},   // regs
-  {"\\=\\=", TK_EQ},              // equal
+  {"\\=\\=", TK_EQ},          // equal
   {"\\!\\=", TK_NEQ},
   {"\\<\\=", TK_LTOEQ},
   {"\\|\\|", TK_OR},          

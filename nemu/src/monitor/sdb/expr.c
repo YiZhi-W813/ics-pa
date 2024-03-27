@@ -418,6 +418,7 @@ word_t expr(char *e, bool *success) {
       if((tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
         ||(tokens[i].type == TK_MUL && i == 0)){
+        printf("test\n");
         tokens[i].type = TK_NOTYPE;
         int tmp = atoi(tokens[i+1].str);
         uintptr_t point = (uintptr_t)tmp;
@@ -429,6 +430,8 @@ word_t expr(char *e, bool *success) {
         tokens_len --;
       }
     }
+
+
 //    printf("initial * tk success!\n");
 //    printf("After inital tk len = %d\n",tokens_len);
   *success = true;

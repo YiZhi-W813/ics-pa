@@ -231,7 +231,7 @@ bool check_parentheses(int p, int q)
 uint32_t eval(int p, int q) {
     printf("compute p:%d q:%d",p,q);
     if (p > q) {
-        /* Bad expression */
+        printf("Bad expression because p=%d and q=%d.\n",p,q);
 //        printf("p=%d,q=%d.\n",p,q);
         assert(0);
     }
@@ -326,6 +326,7 @@ uint32_t eval(int p, int q) {
             case TK_AND:
                 return val1 && val2;
             default:
+                printf("no match op.\n");
                 assert(0);
         }
     }
@@ -357,8 +358,10 @@ word_t expr(char *e, bool *success) {
 
           if(success) 
             sprintf(tokens[i].str, "%d", tmp);
-          else 
+          else{
+            printf("reg2val failed!\n");
             assert(0);
+          }
       }
     }
 

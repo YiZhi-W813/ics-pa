@@ -229,7 +229,7 @@ bool check_parentheses(int p, int q)
 }
 
 uint32_t eval(int p, int q) {
-    printf("compute p:%d q:%d",p,q);
+    printf("compute p:%d q:%d\n",p,q);
     if (p > q) {
         printf("Bad expression because p=%d and q=%d.\n",p,q);
 //        printf("p=%d,q=%d.\n",p,q);

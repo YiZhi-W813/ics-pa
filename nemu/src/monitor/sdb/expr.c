@@ -337,11 +337,14 @@ word_t expr(char *e, bool *success) {
 
   int tokens_len = 0;
   for(int i = 0 ; i < 32 ; i ++){
-	  if(tokens[i].type == 0) 
+	  if(tokens[i].type == 0){
+      printf("tk%d's tpye is %d.\n",i,tokens[i].type);
       break;
+    }
+      
     else{
 	    tokens_len ++;
-      printf("tk len:%d",tokens_len);
+      printf("tk len:%d\n",tokens_len);
     }
   }
 
@@ -398,7 +401,7 @@ word_t expr(char *e, bool *success) {
 	    } 
     }
 
-    for(int i = 0 ; i < tokens_len ; i ++)
+    for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
       if((tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == '*' && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )

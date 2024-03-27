@@ -203,14 +203,14 @@ static bool make_token(char *e) {
 
 bool check_parentheses(int p, int q)
 {   
-    if((tokens[p].type != '(')  || (tokens[q].type != ')'))
+    if((tokens[p].type != TK_LEFT)  || (tokens[q].type != TK_RIGHT))
         return false; //第一和最后一个token是括号对
 
     int l = p , r = q;
     while(l < r)
     {
-        if(tokens[l].type == '('){
-            if(tokens[r].type == ')')
+        if(tokens[l].type == TK_LEFT){
+            if(tokens[r].type == TK_RIGHT)
             {
                 l ++ , r --;
                 continue;
@@ -219,7 +219,7 @@ bool check_parentheses(int p, int q)
             else
                 r --;
         }
-        else if(tokens[l].type == ')')
+        else if(tokens[l].type == TK_RIGHT)
             return false;
         else l ++;
     }

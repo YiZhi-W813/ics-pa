@@ -18,6 +18,7 @@
 #include <memory/paddr.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <cpu/cpu.h>
 #include "sdb.h"
 
 static int is_batch_mode = false;
@@ -65,7 +66,7 @@ static int cmd_info(char *args) {
   if(strcmp(args, "r") == 0){
     isa_reg_display();
   }else if(strcmp(args, "w") == 0){
-    isa_reg_display();
+    sdb_watchpoint_display();
   }else printf("invalid args.\n");
   return 0;
 }
@@ -98,6 +99,21 @@ static int cmd_p(char *args) {
   return 0;
 }
 
+static int cmd_w(char* args){
+    create_watchpoint(args);
+    return 0;
+}
+
+static int cmd_d (char *args){
+    if(args == NULL)
+        printf("No args.\n");
+    else{
+        delete_watchpoint(atoi(args));
+    }
+    return 0;
+}
+
+
 static int cmd_help(char *args);
 
 static struct {
@@ -112,8 +128,9 @@ static struct {
   { "info", "Use info r to print the status of registers or use info w to print monitoring point information", cmd_info },
   { "x", "Scan memory", cmd_x },
   { "p", "Evolution expression", cmd_p },
+  { "w", "Create a watchpoint for u.", cmd_w },
+  { "d", "Delete a watchpoint u choose", cmd_d },
   /* TODO: Add more commands */
-
 };
 
 #define NR_CMD ARRLEN(cmd_table)

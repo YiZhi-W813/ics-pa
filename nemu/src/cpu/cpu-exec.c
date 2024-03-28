@@ -42,6 +42,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   
   WP *p = head;
   for(int i = 0; i < NR_WP; i ++ ){
+    if(p == NULL)break;
 	  bool success = false;
     int tmp = expr(p -> expr,&success);
     if(success){

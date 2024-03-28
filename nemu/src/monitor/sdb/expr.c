@@ -102,7 +102,6 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-        printf("substr_len = %d\n",substr_len);
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
@@ -121,7 +120,6 @@ static bool make_token(char *e) {
             tokens[nr_token].type=rules[i].token_type;
 				    strncpy(tokens[nr_token].str + 1,substr_start,substr_len);
             tokens[nr_token].str[0] = '0';
-            printf("token str = %s\n",tokens[nr_token].str);
             nr_token++;
 				    break;
           case TK_NUM:
@@ -200,7 +198,7 @@ static bool make_token(char *e) {
       return false;
     }
   }
-//  printf("Make tokens success!\n");
+
   return true;
 }
 
@@ -390,8 +388,7 @@ word_t expr(char *e, bool *success) {
 	    }
     }
 
-//  printf("initial neg num tk success!\n");
-  
+
     for(int i = 0 ; i < tokens_len ; i ++){ //初始化非运算
 	    if(tokens[i].type == TK_NOT){
         tokens[i].type = TK_NOTYPE;
@@ -410,14 +407,12 @@ word_t expr(char *e, bool *success) {
 	    } 
     }
 
-//  printf("initial ! tk success!\n");
 
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
       if((tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_NUM )
         ||(tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i+1].type == TK_HEX )
         ||(tokens[i].type == TK_MUL && i == 0)){
-        printf("tokens[%d].type = %d .str=%s\n",i+1,tokens[i+1].type,tokens[i+1].str);
         tokens[i].type = TK_NOTYPE;
         int addr = atoi(tokens[i+1].str);
         int value = paddr_read(addr, 4);
@@ -430,8 +425,6 @@ word_t expr(char *e, bool *success) {
     }
 
 
-//    printf("initial * tk success!\n");
-//    printf("After inital tk len = %d\n",tokens_len);
   *success = true;
   return eval(0, tokens_len - 1);
 }

@@ -362,8 +362,6 @@ word_t expr(char *e, bool *success) {
       }
     }
 
-//  printf("initial reg tk success!\n");
-
     for(int i = 0; i < tokens_len; i ++){   //初始化hex
       if(tokens[i].type == TK_HEX){
           int tmp = strtol(tokens[i].str, NULL, 0);
@@ -371,7 +369,6 @@ word_t expr(char *e, bool *success) {
         }
     }
 
-//  printf("initial hex tk success!\n");
 
     for(int i = 0; i < tokens_len; i ++){ //初始化负数，负号在字符串的最前面或是负号的前面不是数字而后面是数字，则为负数
 	    if(tokens[i].type == TK_SUB && ((i > 0 && tokens[i-1].type != TK_NUM && tokens[i+1].type == TK_NUM) || (i == 0))){

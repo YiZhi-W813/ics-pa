@@ -27,12 +27,55 @@ static char *code_format =
 "#include <stdio.h>\n"
 "int main() { "
 "  unsigned result = %s; "
-"  printf(\"%%u\", result); "
+"  printf(\"%%d\", result); "
 "  return 0; "
 "}";
 
+int index_buf = 0;
+int choose(int n){
+  return rand() % n;
+}
+
+void gen(char c){
+  char cha_buffer[2] = {c, '\0'};
+  strcat(buf, cha_buffer);
+}
+
+char gen_rand_op(){
+  switch (choose(4)){
+    case 0:
+      gen('+');
+      return '+';
+    case 1:
+      gen('-');
+      return '-';
+    case 2:
+      gen('*');
+      return '*';
+    case 3:
+      gen('/');
+      return '/';
+  }
+  return ' ';
+}
+
+
+uint32_t gen_num(){
+  char num_buffer[1024];
+  num_buffer[0] = '\0';
+  uint32_t number = rand() % 100 + 1;
+  sprintf(num_buffer ,"%d", number);
+  strcat(buf, num_buffer);
+  return number;
+}
+
 static void gen_rand_expr() {
-  buf[0] = '\0';
+  switch (choose(3)) {
+  case 0: {gen_num(); break;}
+  case 1: {gen('('); gen_rand_expr(); gen(')'); break;}
+  case 2: {gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;}
+  default: {gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;}
+  }
 }
 
 int main(int argc, char *argv[]) {
@@ -64,6 +107,7 @@ int main(int argc, char *argv[]) {
     pclose(fp);
 
     printf("%u %s\n", result, buf);
+    memset(buf, 0, sizeof(buf));
   }
   return 0;
 }

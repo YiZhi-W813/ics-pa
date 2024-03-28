@@ -44,7 +44,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   for(int i = 0; i < NR_WP; i ++ ){
     if(p == NULL)break;
 	  bool success = false;
-    int tmp = expr(p -> expr,&success);
+    word_t tmp = expr(p -> expr,&success);
     if(success){
       if(tmp != p -> old_value){
         printf("Watchpoint NO %d trig.\n",p -> NO);

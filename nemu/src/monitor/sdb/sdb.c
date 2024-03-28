@@ -100,7 +100,7 @@ static int cmd_p(char *args) {
   return 0;
 }
 
-static int cmd_w(char* args){
+static int cmd_w (char* args){
     create_watchpoint(args);
     return 0;
 }

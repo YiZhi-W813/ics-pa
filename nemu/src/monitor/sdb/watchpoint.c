@@ -132,6 +132,8 @@ void free_wp(WP *wp){
 
 void sdb_watchpoint_display(){
   WP *p = head;
+  if(head == NULL)
+    printf("We dont have watchpoint!\n");
   for(int i = 0; i < NR_WP; i ++ ){
 	  printf("Watchpoint.No: %d, expr = \"%s\", old_value = %d, new_value = %d\n", 
 		p -> NO, p -> expr, p -> old_value, p -> new_value);

@@ -20,6 +20,7 @@
 #include <readline/history.h>
 #include <cpu/cpu.h>
 #include "sdb.h"
+#include "watchpoint.h"
 
 static int is_batch_mode = false;
 

@@ -100,7 +100,7 @@ static bool make_token(char *e) {
     if (tokens[i].type != 0)
     {
       tokens[i].type = 0;
-      strcpy(tokens[i].str, "");
+      memset(tokens[i].str, 0, sizeof(tokens[i].str));
     }
   }
   

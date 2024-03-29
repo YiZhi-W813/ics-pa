@@ -95,7 +95,15 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
 
   nr_token = 0;
-
+  for (int i = 0; i < 32; i++)//初始化tokens
+  {
+    if (tokens[i].type != 0)
+    {
+      tokens[i].type = 0;
+      strcpy(tokens[i].str, "");
+    }
+  }
+  
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {

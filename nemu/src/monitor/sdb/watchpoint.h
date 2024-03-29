@@ -18,8 +18,8 @@ typedef struct watchpoint {
 } WP;
 
 extern WP wp_pool[NR_WP];
-static WP *head __attribute__((unused));
-static WP *free_ __attribute__((unused));
+extern WP *head __attribute__((unused));
+extern WP *free_ __attribute__((unused));
 
 void init_wp_pool();
 WP* new_wp();

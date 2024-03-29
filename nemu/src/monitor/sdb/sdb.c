@@ -58,7 +58,7 @@ static int cmd_q(char *args) {
 static int cmd_si(char *args) {
   int n = 0;
   if(args == NULL)n = 1;else sscanf(args, "%d", &n);
-  printf("execute %d steps.\n", n);
+  printf("Execute %d steps.\n", n);
   cpu_exec(n);
   return 0;
 }
@@ -68,7 +68,7 @@ static int cmd_info(char *args) {
     isa_reg_display();
   }else if(strcmp(args, "w") == 0){
     sdb_watchpoint_display();
-  }else printf("invalid args.\n");
+  }else printf("Invalid args.\n");
   return 0;
 }
 

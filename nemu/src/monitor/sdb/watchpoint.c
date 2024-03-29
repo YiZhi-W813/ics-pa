@@ -157,6 +157,7 @@ void create_watchpoint(char* args){
     strcpy(p -> expr, args);
     bool success = false;
     int tmp = expr(p -> expr,&success);
+    printf("The value of this expr is %d",tmp);
     if(success) p -> old_value = tmp;
     else printf("Expression evalution failed!\n");
     printf("Create watchpoint No.%d success.\n", p -> NO);

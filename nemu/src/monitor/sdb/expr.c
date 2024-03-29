@@ -352,7 +352,6 @@ word_t expr(char *e, bool *success) {
       if(tokens[i].type == TK_REG){
           bool success = false;
           int tmp = isa_reg_str2val(tokens[i].str, &success);    
-          tokens[i].type == TK_NUM;
           if(success) 
             sprintf(tokens[i].str, "%d", tmp);
           else{

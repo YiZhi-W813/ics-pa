@@ -41,7 +41,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   printf("test1\n");
   WP *p = head;
-  printf("*p = %p,*head = %p\n",p,head);
+  printf("*p = %p,*head = %p,*free_ = %p\n",p,head,free_);
   for(int i = 0; i < NR_WP; i ++ ){
     if(p == NULL)break;
 	  bool success = false;

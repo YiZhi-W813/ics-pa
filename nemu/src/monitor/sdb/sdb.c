@@ -101,7 +101,7 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_pt(char *args) {
-  FILE *fp = fopen("~/ics2023/nemu/tools/gen-expr/input", "r");
+  FILE *fp = fopen("/home/yizhi_w/ics2023/nemu/tools/gen-expr/input", "r");
   if (fp == NULL) perror("test_expr error");
 
   char *e = NULL;

@@ -108,6 +108,7 @@ static int cmd_pt(char *args) {
   word_t correct_res;
   size_t len = 0;
   ssize_t read;
+  int count = 0;
   bool success = false;
 
   while (true) {
@@ -122,6 +123,8 @@ static int cmd_pt(char *args) {
       puts(e);
       printf("expected: %u, got: %u\n", correct_res, res);
       assert(0);
+    }else{
+      printf("-----correct expression %d:%s result: %u\n", count, e ,res);
     }
   }
 

@@ -115,7 +115,7 @@ static int cmd_pt(char *args) {
     if(fscanf(fp, "%u ", &correct_res) == -1) break;
     read = getline(&e, &len, fp);
     e[read-1] = '\0';
-    
+    count ++;
     word_t res = expr(e, &success);
     
     assert(success);

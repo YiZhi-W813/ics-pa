@@ -20,7 +20,7 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-
+#define TOKENS_LENGTH 65536
 enum {
   TK_NOTYPE = 1, TK_NUM, TK_ADD, TK_SUB, TK_MUL, TK_DIV, TK_LEFT, TK_RIGHT, 
   TK_HEX, TK_REG, TK_EQ, TK_NEQ, TK_LTOEQ, TK_OR, TK_AND, TK_NOT, TK_DEREF
@@ -86,7 +86,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[TOKENS_LENGTH] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -95,7 +95,7 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
 
   nr_token = 0;
-  for (int i = 0; i < 32; i++)//初始化tokens
+  for (int i = 0; i < TOKENS_LENGTH; i++)//初始化tokens
   {
     if (tokens[i].type != 0)
     {
@@ -342,7 +342,7 @@ word_t expr(char *e, bool *success) {
   }
 
   int tokens_len = 0;
-  for(int i = 0 ; i < 32 ; i ++){
+  for(int i = 0 ; i < TOKENS_LENGTH ; i ++){
 	  if(tokens[i].type == 0){
       break;
     }

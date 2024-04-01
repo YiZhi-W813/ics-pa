@@ -20,7 +20,7 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-#define TOKENS_LENGTH 65536
+#define TOKENS_LENGTH 1024
 enum {
   TK_NOTYPE = 1, TK_NUM, TK_ADD, TK_SUB, TK_MUL, TK_DIV, TK_LEFT, TK_RIGHT, 
   TK_HEX, TK_REG, TK_EQ, TK_NEQ, TK_LTOEQ, TK_OR, TK_AND, TK_NOT, TK_DEREF

@@ -207,8 +207,6 @@ static bool make_token(char *e) {
   return true;
 }
 
-//检查左右括号匹配，如果是(expr)类型，就返回true
-//但是小心(1+2)*(3+4)的情况，即有运算符不在括号里，则返回false
 bool check_parentheses(int p, int q) {
   if (tokens[p].type==TK_LEFT && tokens[q].type==TK_RIGHT) {
     int par = 0;
@@ -221,8 +219,6 @@ bool check_parentheses(int p, int q) {
   }
   return false;
 }
-
-
 
 uint32_t eval(int p, int q) {
     if (p > q) {

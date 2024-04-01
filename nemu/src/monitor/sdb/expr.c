@@ -363,7 +363,7 @@ word_t expr(char *e, bool *success) {
 
 
     for(int i = 0; i < tokens_len; i ++){ //初始化负数，负号在字符串的最前面或是负号的前面不是数字而后面是数字，则为负数
-	    if(tokens[i].type == TK_SUB && ((i > 0 && ( tokens[i-1].type != TK_NUM || tokens[i-1].type != TK_HEX || tokens[i-1].type != TK_RIGHT) 
+	    if(tokens[i].type == TK_SUB && ((i > 0 && ( tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_RIGHT) 
       && ( tokens[i+1].type == TK_NUM || tokens[i+1].type == TK_HEX )) || (i == 0))){
         tokens[i].type = TK_NOTYPE; //判断出负号后把负号后一个token的全部内容向后移一位，最前面加个负号
         for(int j = 31; j > 0; j --){

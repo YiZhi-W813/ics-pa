@@ -220,7 +220,7 @@ bool check_parentheses(int p, int q) {
   return false;
 }
 
-uint32_t eval(int p, int q) {
+int eval(int p, int q) {
     if (p > q) {
         printf("Bad expression because p=%d and q=%d.\n",p,q);
 //        printf("p=%d,q=%d.\n",p,q);
@@ -303,8 +303,8 @@ uint32_t eval(int p, int q) {
 
         int  op_type = tokens[op].type;
 
-        uint32_t  val1 = eval(p, op - 1);
-        uint32_t  val2 = eval(op + 1, q);
+        int  val1 = eval(p, op - 1);
+        int  val2 = eval(op + 1, q);
 
         switch (op_type) {
             case TK_ADD:

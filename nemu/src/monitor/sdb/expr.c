@@ -207,16 +207,24 @@ static bool make_token(char *e) {
   return true;
 }
 
-bool check_parentheses(int p, int q) {
-  if (tokens[p].type=='(' && tokens[q].type==')') {
-    int par = 0;
-    for (int i = p; i <= q; i++) {
-      if (tokens[i].type=='(') par++;
-      else if (tokens[i].type==')') par--;
-
-      if (par == 0) return i==q; // the leftest parenthese is matched
+//检查左右括号匹配，如果是(expr)类型，就返回true
+//但是小心(1+2)*(3+4)的情况，即有运算符不在括号里，则返回false
+bool check_parentheses(int l,int r){
+  if(tokens[l].type!='(' || tokens[r].type!=')'){
+    return false;
+  }
+  int cnt=0;
+  for(int i=l;i<=r;++i){
+    if(tokens[i].type=='(')cnt++;
+    else if(tokens[i].type==')'){
+      if(cnt>0)cnt--;
+      else return false;
+    }
+    else if(cnt==0&&(tokens[i].type=='+'||tokens[i].type=='-'||tokens[i].type=='*'||tokens[i].type=='/'||tokens[i].type==TK_AND||tokens[i].type==TK_OR||tokens[i].type==TK_EQ||tokens[i].type==TK_NEQ)){
+      return false;
     }
   }
+  if(cnt==0)return true;
   return false;
 }
 
@@ -234,7 +242,7 @@ uint32_t eval(int p, int q) {
          */
         return atoi(tokens[p].str);
     }
-    else if (check_parentheses(p, q) == (true)) {
+    else if (check_parentheses(p, q) == true) {
         /* The expression is surrounded by a matched pair of parentheses.
          * If that is the case, just throw away the parentheses.
          */

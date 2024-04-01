@@ -255,7 +255,7 @@ int eval(int p, int q) {
         }
     
         int op = 0; // op = the position of 主运算符 in the token expression;
-        int prio_min = 0;
+        int prio_min = 15;
         for(int i = p ; i <= q ; i ++)
         {
             if(tokens[i].type == TK_LEFT)
@@ -264,37 +264,37 @@ int eval(int p, int q) {
                     i ++;
             }
             if(tokens[i].type == TK_OR){ //优先级12
-                if(prio_min <= 12){
+                if(prio_min >= 12){
                   op = max(op, i);  //同优先级靠后的是主操作符
                   prio_min = 12;
                 }
             }
             if(tokens[i].type == TK_AND){ //优先级11
-                if(prio_min <= 11){
+                if(prio_min >= 11){
                   op = max(op, i);  //同优先级靠后的是主操作符
                   prio_min = 11;
                 }
             }
             if((tokens[i].type == TK_EQ) || (tokens[i].type == TK_NEQ)){ //优先级7
-                if(prio_min <= 7){
+                if(prio_min >= 7){
                   op = max(op, i);  //同优先级靠后的是主操作符
                   prio_min = 7;
                 }
             }
             if(tokens[i].type == TK_LTOEQ){ //优先级6
-                if(prio_min <= 6){
+                if(prio_min >= 6){
                   op = max(op, i);
                   prio_min = 6;
                 }
             }
             if((tokens[i].type == TK_ADD) || (tokens[i].type == TK_SUB)){ //优先级4
-                if(prio_min <= 4){
+                if(prio_min >= 4){
                   op = max(op, i);
                   prio_min = 4;
                 }
             }
             if((tokens[i].type == TK_MUL) || (tokens[i].type == TK_DIV)){ //优先级3
-                if(prio_min <= 3){
+                if(prio_min >= 3){
                   op = max(op, i);
                   prio_min = 3;
                 }

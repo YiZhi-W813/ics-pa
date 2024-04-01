@@ -23,7 +23,7 @@
 #define TOKENS_LENGTH 2048
 enum {
   TK_NOTYPE = 1, TK_NUM, TK_ADD, TK_SUB, TK_MUL, TK_DIV, TK_LEFT, TK_RIGHT, 
-  TK_HEX, TK_REG, TK_EQ, TK_NEQ, TK_LTOEQ, TK_OR, TK_AND, TK_NOT, TK_DEREF
+  TK_HEX, TK_REG, TK_EQ, TK_NEQ, TK_LTOEQ, TK_OR, TK_AND, TK_NOT, TK_DEREF,TK_NEG
   /* TODO: Add more token types */
 };
 
@@ -241,6 +241,19 @@ uint32_t eval(int p, int q) {
     }
 
     else {
+
+        if(tokens[p].type==TK_NEG){  //首先判断是不是 指针/负数/非运算，这三个要做特殊处理
+          return -eval(p+1,q);
+        }
+        else if(tokens[p].type==TK_DEREF){
+          int addr=eval(p+1,q);//得到内存地址
+          int value=paddr_read(addr,4);//访存4字节
+          return value;
+        }
+        else if(tokens[p].type==TK_NOT){
+          return !eval(p+1,q);
+        }
+    
         int op = 0; // op = the position of 主运算符 in the token expression;
         int prio_min = 0;
         for(int i = p ; i <= q ; i ++)
@@ -364,53 +377,18 @@ word_t expr(char *e, bool *success) {
 
     for(int i = 0; i < tokens_len; i ++){ //初始化负数，负号在字符串的最前面或是负号的前面不是数字/hex/reg/)而后面是数字/hex/reg/(，则为负数
 	    if(tokens[i].type == TK_SUB && ((i > 0 && ( tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_RIGHT && tokens[i-1].type != TK_REG) 
-      && ( tokens[i+1].type == TK_NUM || tokens[i+1].type == TK_HEX || tokens[i+1].type == TK_REG || tokens[i+1].type == TK_LEFT)) || (i == 0))){
-        tokens[i].type = TK_NOTYPE; //判断出负号后把负号后一个token的全部内容向后移一位，最前面加个负号
-        for(int j = 31; j > 0; j --){
-          tokens[i+1].str[j] = tokens[i+1].str[j-1];
-        }
-        tokens[i+1].str[0] = '-';
-
-        for(int j = i + 1; j < tokens_len; j ++){
-          tokens[j - 1] = tokens[j];
-        }
-        tokens_len --;
+      && ( tokens[i+1].type == TK_NUM || tokens[i+1].type == TK_HEX || tokens[i+1].type == TK_REG || tokens[i+1].type == TK_LEFT)) 
+      || (i == 0))){
+        tokens[i].type = TK_NEG;
 	    }
     }
 
-
-    for(int i = 0 ; i < tokens_len ; i ++){ //初始化非运算
-	    if(tokens[i].type == TK_NOT){
-        tokens[i].type = TK_NOTYPE;
-        int tmp = atoi(tokens[i+1].str);
-        if(tmp == 0){
-          memset(tokens[i+1].str, 0 ,sizeof(tokens[i+1].str));
-          tokens[i+1].str[0] = '1';
-        }
-        else{
-          memset(tokens[i+1].str, 0 , sizeof(tokens[i+1].str));
-        }
-        for(int j = i + 1; j < tokens_len; j ++){
-          tokens[j - 1] = tokens[j];
-        }
-        tokens_len --;
-	    } 
-    }
-
-
     for(int i = 0 ; i < tokens_len ; i ++)  //初始化指针解引用
     {
-      if((tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i-1].type != TK_RIGHT && tokens[i+1].type == TK_NUM )
-        ||(tokens[i].type == TK_MUL && i > 0 && tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i-1].type != TK_RIGHT &&  tokens[i+1].type == TK_HEX )
-        ||(tokens[i].type == TK_MUL && i == 0)){
-        tokens[i].type = TK_NOTYPE;
-        int addr = atoi(tokens[i+1].str);
-        int value = paddr_read(addr, 4);
-        sprintf(tokens[i+1].str, "%d", value);	    
-        for(int j = i + 1; j < tokens_len ; j ++){
-          tokens[j - 1] = tokens[j];
-        }
-        tokens_len --;
+	    if(tokens[i].type == TK_MUL && ((i > 0 && ( tokens[i-1].type != TK_NUM && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_RIGHT && tokens[i-1].type != TK_REG) 
+      && ( tokens[i+1].type == TK_NUM || tokens[i+1].type == TK_HEX || tokens[i+1].type == TK_REG || tokens[i+1].type == TK_LEFT)) 
+      || (i == 0))){
+        tokens[i].type = TK_DEREF;
       }
     }
 

@@ -210,7 +210,7 @@ static bool make_token(char *e) {
 //检查左右括号匹配，如果是(expr)类型，就返回true
 //但是小心(1+2)*(3+4)的情况，即有运算符不在括号里，则返回false
 bool check_parentheses(int l,int r){
-  if(tokens[l].type!='(' || tokens[r].type!=')'){
+  if(tokens[l].type!=TK_LEFT || tokens[r].type!=TK_RIGHT){
     return false;
   }
   int cnt=0;

@@ -214,7 +214,7 @@ bool check_parentheses(int p, int q) {
       if (tokens[i].type=='(') par++;
       else if (tokens[i].type==')') par--;
 
-      if (par == 0) return true; // the leftest parenthese is matched
+      if (par == 0) return i==q; // the leftest parenthese is matched
     }
   }
   return false;
@@ -234,7 +234,7 @@ uint32_t eval(int p, int q) {
          */
         return atoi(tokens[p].str);
     }
-    else if (check_parentheses(p, q) == true) {
+    else if (check_parentheses(p, q) == (true)) {
         /* The expression is surrounded by a matched pair of parentheses.
          * If that is the case, just throw away the parentheses.
          */

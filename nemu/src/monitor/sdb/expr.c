@@ -215,12 +215,13 @@ bool check_parentheses(int l,int r){
   }
   int cnt=0;
   for(int i=l;i<=r;++i){
-    if(tokens[i].type=='(')cnt++;
-    else if(tokens[i].type==')'){
+    if(tokens[i].type==TK_LEFT)cnt++;
+    else if(tokens[i].type==TK_RIGHT){
       if(cnt>0)cnt--;
       else return false;
     }
-    else if(cnt==0&&(tokens[i].type=='+'||tokens[i].type=='-'||tokens[i].type=='*'||tokens[i].type=='/'||tokens[i].type==TK_AND||tokens[i].type==TK_OR||tokens[i].type==TK_EQ||tokens[i].type==TK_NEQ)){
+    else if(cnt==0&&(tokens[i].type==TK_ADD||tokens[i].type==TK_SUB||tokens[i].type==TK_MUL||tokens[i].type==TK_DIV||
+    tokens[i].type==TK_AND||tokens[i].type==TK_OR||tokens[i].type==TK_EQ||tokens[i].type==TK_NEQ||tokens[i].type==TK_LTOEQ||tokens[i].type==TK_NOT)){
       return false;
     }
   }

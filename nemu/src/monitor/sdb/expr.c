@@ -253,15 +253,20 @@ int eval(int p, int q) {
         else if(tokens[p].type==TK_NOT){
           return !eval(p+1,q);
         }
-    
+
         int op = 0; // op = the position of 主运算符 in the token expression;
-        int prio_min = 0;
+        int prio_min = 0 , left_count = 0;
         for(int i = p ; i <= q ; i ++)
         {
-            if(tokens[i].type == TK_LEFT)
+            if(tokens[i].type == TK_LEFT)//局部括号内的符号肯定不是op
             {
-                while(tokens[i].type != TK_RIGHT)
-                    i ++;
+                left_count = 1;
+                i++;
+                while(left_count != 0){
+                  if(tokens[i].type == TK_LEFT)left_count++;
+                  if(tokens[i].type == TK_RIGHT)left_count--;
+                  i++;
+                }
             }
             if(tokens[i].type == TK_OR){ //优先级12
                 if(prio_min <= 12){

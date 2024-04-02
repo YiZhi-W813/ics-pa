@@ -265,7 +265,7 @@ int eval(int p, int q) {
                 while(left_count != 0){
                   if(tokens[i].type == TK_LEFT)left_count++;
                   if(tokens[i].type == TK_RIGHT)left_count--;
-                  i++;
+                  if(i < q)i++;
                 }
             }
             if(tokens[i].type == TK_OR){ //优先级12

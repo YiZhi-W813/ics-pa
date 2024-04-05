@@ -209,12 +209,12 @@ static bool make_token(char *e) {
 
 bool check_parentheses(int p, int q) {
   if (tokens[p].type==TK_LEFT && tokens[q].type==TK_RIGHT) {
-    int count = 0;
+    int par = 0;
     for (int i = p; i <= q; i++) {
-      if (tokens[i].type==TK_LEFT) count++;
-      else if (tokens[i].type==TK_RIGHT) count--;
+      if (tokens[i].type==TK_LEFT) par++;
+      else if (tokens[i].type==TK_RIGHT) par--;
 
-      if (count == 0 && i==q) return true;
+      if (par == 0) return i==q; // the leftest parenthese is matched
     }
   }
   return false;

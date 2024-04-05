@@ -47,7 +47,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     word_t tmp = expr(p -> expr,&success);
     if(success){
       if(tmp != p -> old_value){
-        printf("Watchpoint NO %d trig,pc = %x.The old value is %d and new value is %d\n",p -> NO, _this->pc, p -> old_value, tmp);
+        printf("Watchpoint NO %d trig,pc = %x.The old value is %x and new value is %x\n",p -> NO, _this->pc, p -> old_value, tmp);
         p -> old_value = tmp;
         nemu_state.state = NEMU_STOP;
         return ;
